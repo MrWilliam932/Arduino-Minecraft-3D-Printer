@@ -1,6 +1,6 @@
-#Arduino based Minecraft 3D Printer 
+# Arduino based Minecraft 3D Printer 
 
-##This is an Arduino Based Minecraft 3D Printer
+## This is an Arduino Based Minecraft 3D Printer
 
 So quite a lot of people asked me for the sketch and a tutorial
 on how to get the thing to work, well, this is it. I'm gonna
@@ -17,7 +17,7 @@ For example, This program does not come with a menu where you can
 change settings, change the model to print, not even a way to pause
 the print if it's not printing correctly.
 
-##How the gcode works
+## How the gcode works
 gcode is just a set of instructions which tells the printer/cnc
 where it has to go, how fast and at which temperature. 
 
