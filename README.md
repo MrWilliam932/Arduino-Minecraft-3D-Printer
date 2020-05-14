@@ -2,7 +2,7 @@
 
 ## This is an Arduino Based Minecraft 3D Printer
 
-So quite a lot of people asked me for the sketch and a tutorial
+So some of you asked me for the sketch and a tutorial
 on how to get the thing to work, well, this is it. I'm gonna
 explain every single bit you need to know to get this thing to
 work, also, I will tell you how to expand/add more functionality
@@ -59,13 +59,56 @@ This printer works the same way but instead of moving real motors
 it converts the gcode commands into Minecraft commands. And that's
 done like this:
 
-First you read the file line by line looking for a '\r' (carriage
-return) then all the read characters are inserted into a string.
-Then the program checks that that string starts with 'G' (in the
-program you can actually change this, or add more letters, command
-types), If it doesn't then the command is deleted and then starts
+First you read the file line by line looking for a carriage
+return ('\r') then all the read characters are inserted into a string.
+Then the program checks that that string starts with 'G' (**in the program you can actually change this, or add more letters/command types**)
+If it doesn't then the command is deleted and then starts
 looking for a new line. If it does, then calls the next function
-"CommandData" with the line just read as parameter.
+"CommandData" with the line just read as a parameter.
 
-This function looks 
- 
+This function then removes the comment if it has one, this is done by
+asking the string if it has a ';', if it does, then sets the length 
+of the string from the beggining to the semicolon position - 1.
+If it doesn't the length is the position of the next carriage return -1.
+
+Once we have the command separated from the comment, it's time to
+separate the command into it's parts.
+
+The Gcode has it's parts separated by espaces, so in order to take the parts
+of the command we just need to look for the spaces and save the string read
+into a new string, then delete the part we just took from the original string
+and keep looking for new parts in the command until the command string is empty.
+All this data is saved into an Array of 5 Strings.
+
+With our command separated into parts it's time to convert all the strings into
+something we can work with, The first string is the Code, this part will tell the
+arduino what has to do with the attributes we send to it.
+
+We do that by checking the Code with a list of codes we have at the beggining
+of the program, called "ValidCmds" and at the moment just recognizes 2 commands:
+G1 (linear movement) and G28 (home all axes), If the command we just sent doesn't
+have one of these codes then the command is ignored, but if it doesn't then starts
+looking into the array of strings one by one.
+
+Each string in the array is checked against some parameter prefixes, if the command
+starts with a known prefix then is decoded, first it removes the prefix in order to 
+have a string with only numbers.
+
+X and Y are prefixes that refer to X and Y movements, **these movements are ignored if the printer wants to move less than a block in any given direction**
+in other words, if the amount of movement is < 1 then the printer ignores theres a movement in that axis.
+
+Since the Z axis always moves 1 by 1 the printer just needs to know if the value is > 0.
+
+The E parameter, the amount of extrussion is only needed to know if it wants to extrude or not, so if one of the parameters starts with E the printer knows
+that has to extrude, we dont care about the amount since every command tell us if it needs to extrude or not.
+
+If a command says it wants to move but does not extrude, then is a simple movement. 
+
+All the parameters are then returned and stored in a data type.
+
+The next function is the CmdExec which calls the function associated with it's name.
+
+Next I'm going to explain 
+
+
+
