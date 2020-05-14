@@ -108,7 +108,52 @@ All the parameters are then returned and stored in a data type.
 
 The next function is the CmdExec which calls the function associated with it's name.
 
-Next I'm going to explain 
+Next I'm going to explain How the G1 Command works which is the most important bit of code.
 
+G1 Command is the command that tells the printer to move the extruder in a linear fashion in one or two axis at a time.
+The function of the command needs to know a number of things:
+*The Current Extruder Position
+*The Target Position of the extruder
+*The Axis that are going to move
+*If it has to extrude material or not
+*If the command has to be ignored or not
 
+To move all this data in a comfortable way around the program I've made data structures.
+
+One is the GCommand type which looks like this:
+```C++
+struct GCommand{
+  String Code;
+  int XPos;
+  int YPos;
+  int ZPos;
+  bool NewX;
+  bool NewY;
+  bool NewZ;
+  bool Extrude;
+  bool IgnoreCmd;
+};
+```
+
+The second one is the Point type:
+```C++
+struct Point{
+  int X;
+  int Y;
+  int Z;
+};
+```
+So lets get to the drawing thing of the program, the actual calculations the arduino does to print blocks.
+
+First of all let's talk about single axis movements that extrude material:
+
+Single axis movements are really easy to make work, you just need to know what axis do you wanna move and where, then check if your target is greater or less than your extruder's position
+so you can draw the line forwads or backwards from your extruder, this is accomplished by initializing the for with your extruder position, and setting the Target position as your stopping condition.
+You increment or decrement the for variable depending on the target position < extruder position we mentioned earlier. 
+
+That's it for single axis extrusions, is that easy.
+
+Now for the tricky(-ish) part, two axis movements.
+
+So in order to accomplish this we need a little bit of math (**a really TINY little bit of math I promise**)
 
