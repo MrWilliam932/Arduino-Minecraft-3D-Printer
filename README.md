@@ -183,8 +183,10 @@ which is going to result into 0 or infinite, if you multiply that by your X, you
 
 Ok so, If we use this formula for 2 axis extrussions we should be ok right?
 
-## WRONG!
+### **WRONG!**
 
-well, yes, but actually no. Let me explain.
+well, yes, but actually no. Let me explain:
+
+
 
   
