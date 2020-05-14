@@ -157,7 +157,8 @@ Now for the tricky(-ish) part, two axis movements.
 
 So in order to accomplish this we need a little bit of math (**a really TINY little bit of math I promise**)
 
-We have to points and we have to make a line, so the obvious thing to use is the **two-point formula** wich looks something like this: "y = m * x" 
+We have to points and we have to make a line, so the obvious thing to use is the **two-point formula** wich looks something like this: 
+"y = m * x" 
 the only thing that we don't have is the "m" wich is the slope or how inclined is the rect, this value is really important because we get rid of a very important problem.
 But first let's see how we can know the slope.
 
@@ -171,3 +172,19 @@ deltaX = Target.XPos - Extruder.X;
 m = (deltaY)/(deltaX);
 ```
 
+My first attempt to make this whole program work was by using directly this function for everything, even single axis extrusions. Which is a mistake and I will tell you why:
+
+first of all the slope is calculated dividing the amount of movement in Y divided by the amount of movement in X. If you try to move in a single axis that means that the slope formula will look something like this:
+
+*m = 0 / something
+*m = something / 0
+
+which is going to result into 0 or infinite, if you multiply that by your X, you'll have 0 or infinite and will try to put the block in Mordor and we don't want that. So that's why this formula is not used for everything.
+
+Ok so, If we use this formula for 2 axis extrussions we should be ok right?
+
+## WRONG!
+
+well, yes, but actually no. Let me explain.
+
+  
