@@ -157,3 +157,17 @@ Now for the tricky(-ish) part, two axis movements.
 
 So in order to accomplish this we need a little bit of math (**a really TINY little bit of math I promise**)
 
+We have to points and we have to make a line, so the obvious thing to use is the **two-point formula** wich looks something like this: "y = m * x" 
+the only thing that we don't have is the "m" wich is the slope or how inclined is the rect, this value is really important because we get rid of a very important problem.
+But first let's see how we can know the slope.
+
+m = (Y2 - Y1)/(X2 - X1)
+
+in the program I've separated the numerator and denominator into variables for convenience. In the program looks like this:
+
+```C++
+deltaY = Target.YPos - Extruder.Y;
+deltaX = Target.XPos - Extruder.X;
+m = (deltaY)/(deltaX);
+```
+
