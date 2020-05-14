@@ -183,9 +183,42 @@ which is going to result into 0 or infinite, if you multiply that by your X, you
 
 Ok so, If we use this formula for 2 axis extrussions we should be ok right?
 
-### **WRONG!**
+### WRONG!
 
-well, yes, but actually no. Let me explain:
+Well, yes, but actually no. Let me explain:
+
+If we want to draw a line using this formula It's easy to asume that we just need to give the formula the X value multiply it by the slope and we shoud be good-to-gol, and that's kinda correct, you see? If your line moves
+more in the X direction than in the Y direction the formula works just fine, we give one value of X and It returns a value of Y. BUT if It moves more in the Y direction that means that if you give a value of X it returns
+a value of Y, in the next iteration of the for when you give the next value of X it will return a value of Y and it will be correct, BUT the value of Y compared to the last value of Y will be more than one which is going to
+leave a gap between one block and the other. (I will post some images of what I mean **If I remember**).
+So we have this problem where the formula works but sometimes, only when the travel in the X value is greater than the travel in the Y value. 
+
+So to solve this we have to use another formula, well It's actually the same, but rearranged.
+
+we saw that "y = m * x" is useful when the travel in X is greater than the travel in Y
+so rearraging the formula like this "x = y / m"  we can give Y values and get the X values. Exactly like before but relying on the other axis.
+
+So we need to know when to use this formula or the other.
+
+How do we solve this? How do we know when the line is going to travel more in X than in Y?
+This is where **the slope** comes to save the day.
+
+The slope tells us how inclined is a line, the more steep is the line, the bigger is the slope.
+
+*if the slope is < 1, the line travels more in X than in Y
+*if the slope is > 1, the line travels more in Y than in X1
+*if the slope is = 1, the line traves the same in X than in Y0
+
+So using this criteria, we just need to use the value of m to select which formula to use. (just using the absolute value of it so it works on negative slopes)
+
+**I WILL EXPAND THIS SECTION A LITTLE BIT MORE, BUT FOR NOW THIS IS TAKING TOO LONG, NEXT WEEK YOU'LL HAVE MORE INFO ON THIS SUBJECT**
+
+Then the minecraft command is asembled using all the axis data for each iteration of the program. 
+
+It makes me sad and mad that in 3D printers X and Y are the horizontal axes, and Z the vertical one, and in Minecraft FOR SOME REASON, X and Z are the horizontal ones and Y is the vertical, just keep an eye on that when reading the code.
+
+  
+
 
 
 
