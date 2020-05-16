@@ -9,6 +9,9 @@ work, also, I will tell you how to expand/add more functionality
 to the program so you can modify it.
 
 ## First Thing to know
+
+**I've only tested this in Minecraft Java Edition**
+
 The program is WIP (work in progress) which means the program is
 not in it's final state, it works, but some stuff has to be done
 manually.
@@ -217,7 +220,39 @@ Then the minecraft command is asembled using all the axis data for each iteratio
 
 It makes me sad and mad that in 3D printers X and Y are the horizontal axes, and Z the vertical one, and in Minecraft FOR SOME REASON, X and Z are the horizontal ones and Y is the vertical, just keep an eye on that when reading the code.
 
-  
+## Guide to Use the Program
+
+### Important things to take into account
+	*Remember that the program is not finished, there are probably some bugs left, and not all planned features are done yet.
+	*This 3D printer uses Keyboard emulation, that means it "writes commands" for you, and this means you can't move while is printing, you can look around with the mouse but don't move or will misplace blocks since it uses relative coordinates to place blocks
+	*Once the arduino detects the card the print will start automatically, so be sure to be in already in minecraft, not paused and __With the keyboard layout set to ENGLISH US__
+	*Keep in mind some popups from other programs can, well..., pop up in front of the game, if that's the case the arduino will keep sending commands regardless, so when the arduino "presses" the Enter Key will act over the popup instead of minecraft, so if you have programs that you know that create popups, close them.
+
+### Let's prepare the Slic3r
+
+First you have to download Slic3r from it's webpage, I'm assuming you know how to install stuff, ok once installed, go to File/Load Config, then select the config.ini I left you in the github repo, Keep in mind this will override the current config you have, but only while you have the Slic3r open, to actually save that config into a profile you have to manually save each part individually:
+for that you just go to Settings/Print Settings, hit save and give it a name, then the same for Filament Settings and Printer Settings. Then you should be ready to Slice. Insert a 3D model and put them.
+
+Keep in mind that in the Slic3r positive Y is north (in minecraft) and positive X is east (in minecraft) and the printer 0,0,0 of the Slic3r is the position of your feet in minecraft. 
+
+Ok so, put the model facing the correct orientation, then hit, below the plater you can see different views of the print, The Preview It's the most interesting. Once all of this is done, hit the Export Gcode button.
+
+**Since I'm using the default Arduino SD Card Library the names have to be an 8 character name (or less) + 4 character file extension including the '.', 12 characters total (e.g. 3DBenchy.gco)**
+remember to copy the name of the file including the extension, to put it in the Arduino program later, you can just write it again... 
+
+Then go ahead and save it to your SD Card.
+
+### Minecraft Preparation
+
+Open your minecraft client, create a Flat World, open F3, and select a point to stay while printing, and keep your Y coordinate.
+
+Now it's time to calculate your Offset from the ground to insert it into the Arduino Sketch, It's calculated like this:
+
+Vertical offset = 0 - [Your Y] - ([The Start Print Height] - 1)
+
+### How to use the Arduino Sketch
+
+
 
 
 
