@@ -20,6 +20,17 @@ For example, This program does not come with a menu where you can
 change settings, change the model to print, not even a way to pause
 the print if it's not printing correctly.
 
+
+**Also this is not an Arduino Tutorial nor an Electronics tutorial**
+Not trying to be rude but, this is strictly a "this sketch only" tutorial and how to make it work. I'm not going to walk you through basic electronics or arduino programming.
+
+## Parts list
+
+You need: 
+	*An Arduino Leonardo, Micro OR Pro Micro
+	*An SD Card Breakout board
+	*An SD Card
+
 ## How the gcode works
 gcode is just a set of instructions which tells the printer/cnc
 where it has to go, how fast and at which temperature. 
@@ -248,11 +259,51 @@ Open your minecraft client, create a Flat World, open F3, and select a point to 
 
 Now it's time to calculate your Offset from the ground to insert it into the Arduino Sketch, It's calculated like this:
 
-Vertical offset = 0 - [Your Y] - ([The Start Print Height] - 1)
+Vertical offset = 0 - ([Your Y] - ([The Start Print Height] - 1))
+
+if you are at 25 your offset should be -22 
 
 ### How to use the Arduino Sketch
 
+First of all, open your arduino IDE, then the 3D Printer Sketch.
 
+Go to Line 61 where you can find this bit of code:
+
+```C++
+Point Offset = {3,3,-22};
+```
+this line sets the offset from your feet. Is a way to "move" the plater position.
+Insert your vertical offset where the -22 is :P As I mentioned earlier, 3D Printer Coordinates and Minecraft coordinates have the Y and the Z swapped, so your Y offset (in minecraft) should be in the Z offset (in the 3D Printer Program)
+
+Next line you can edit is this:
+
+```C++
+int delayT = 100;
+```
+This line sets the delay between commands, in other words how fast the printer prints. I'd personally leave it like this.
+
+And the next and Final Line to Edit is the Name of the file wich is in line 98:
+```C++
+dataFile  = SD.open("Sharkie.gco");
+```
+
+### How to wire the thing
+
+Ok since this is a prototype, most of the features, and schematic may vary from your set up to mine, but I can tell you how to wire it. 
+
+Wire the SD card module to your arduino (depending on the arduino you'll have the SPI interface in different places)
+
+The tricky thing is that you "need" a SD card module with a Card Detect pin (CD), If your SD card module has a card detect pin conect it to the digital pin 19 of your corresponding arduino, in Micro and Pro Micro seems to be A1, In Leonardo seems to be A5.
+If your SD Card does not have a CD pin output you can do 2 things:
+
+	*Solder a wire to the CD pin in the SD Card Slot, There is always one, but for some reason they don't wire it in some breakout boards. When the card is inserted there is a contact that shorts to ground. Find it with a multimeter or something (I did this one)
+	*Just Connect manually the pin 19 to ground when the card is inserted.
+
+I have more things in the program, but they are not used yet. Like an Encoder, or buttons to do different stuff. 
+
+Soo I think that's all. I'll be adding more info If I remember more stuff to be told. 
+
+Now the only thing it's left is to load the Sketch to the Arduino (don't insert the SD Card yet) and go into minecraft.
 
 
 

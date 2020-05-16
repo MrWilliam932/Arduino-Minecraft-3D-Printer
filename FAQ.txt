@@ -1,0 +1,28 @@
+Q: How did you get the arduino to interact with Minecraft?
+A: I'm using the Keyboard Library to interact with minecraft, Your PC "Thinks" that you are the one writing commands.
+
+Q: Nice but what’s with all the missing blocks?
+A: Decimals my friend, I've tried to remove as much decimals as I could, But the slicer keeps placing decimals in the coordinates so they sometimes make holes.
+
+Q: What commands were used?
+A: just the /setblock.
+
+Q: That infill is way too high you’re wasting so much filla—- wait...
+A: One of the great things about a minecraft 3D printer is that you don't have to worry about gravity, cooling or adhession.
+
+Q: Is there a limit on how big the model can be horizontally?
+A: Yes, The limit is the rendered area in minecraft, you can't put blocks in a non redered area, according to minecraft.
+
+Q: So lemme get this straight, you could model something in blender, export it as a .stl, and then it’ll just build it in Minecraft for you?
+A: YES, you have to convert it to gcode using slic3r, but YES!
+
+Q: /gamerule commandblockOutput false
+A: I KNOOOOOOOOW, I left it On purpose so I can "monitor" the printer. You told me like 24653463 times, Thanks anyways!
+
+Q: HOW?
+A: Read the README :P
+
+Q: Shouldn’t you be in nasa?
+A: Naah the program is not THAT complicated.
+
+
